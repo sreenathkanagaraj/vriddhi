@@ -38,7 +38,6 @@
             height: auto;
             display: block;
             margin: 20px auto;
-            /* Center images */
         }
 
         .animated {
@@ -64,7 +63,62 @@
             bottom: 0;
             width: 100%;
         }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #popup:hover {
+            background-color: #555;
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-7LkWEzqTdpEfELxcZZlZL3C/5zNpJ4P5U+4LkB9CCkU=" crossorigin="anonymous"
+        onerror="loadLocalScript()"></script>
+    <script>
+        function loadLocalScript() {
+            var script = document.createElement('script');
+            script.src = 'D:/myp/protfolio/vriddhi/jquery-3.7.1.min.js';
+            document.head.appendChild(script);
+        }
+    </script>
+
+
+
 </head>
 
 <body>
@@ -77,8 +131,8 @@
         <h2 class="animated">Welcome to Our Platform</h2>
         <p class="animated">We specialize in providing exceptional B2B mid-party agent services. Our commitment is to
             facilitate seamless transactions and foster long-term partnerships between businesses.</p>
-        <img src="https://via.placeholder.com/800x400" alt="Image 1" class="animated">
-        <img src="https://via.placeholder.com/800x400" alt="Image 2" class="animated">
+        <img src="https://via.placeholder.com/800x400" alt="Business Collaboration" class="animated">
+        <img src="https://via.placeholder.com/800x400" alt="Global Business Network" class="animated">
     </section>
 
     <section>
@@ -97,12 +151,51 @@
         <p class="animated">Ready to elevate your business? Contact us today to discuss how we can collaborate.</p>
         <p class="animated">Email: vriddhiimpex.com</p>
         <p class="animated">Phone: (+91) 9786114113</p>
-        <img src="https://via.placeholder.com/800x400" alt="Contact Image" class="animated">
+
+        <form id="contactForm" action="contact.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <label for="appointmentDate">Preferred Appointment Date:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate" required>
+
+            <label for="appointmentTime">Preferred Appointment Time:</label>
+            <input type="time" id="appointmentTime" name="appointmentTime" required>
+
+            <button type="button" onclick="submitForm()">Send Message</button>
+        </form>
     </section>
 
     <footer>
         <p class="animated">&copy; 2023 vriddhi impex. All rights reserved.</p>
     </footer>
+
+    <div id="popup">Open Messaging</div>
+
+    <script>
+        function submitForm() {
+            var formData = $("#contactForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "contact.php",
+                data: formData,
+                success: function (response) {
+                    alert("Form submitted successfully!");
+                },
+                error: function (error) {
+                    alert("Error submitting form. Please try again.");
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>
